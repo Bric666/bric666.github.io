@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>毕业之作，J3160的折腾经历</title>
+    <link href="/posts/19924/"/>
+    <url>/posts/19924/</url>
+    
+    <content type="html"><![CDATA[<p>这台J3160是上个星期买的，因为我的1037U被我原价卖出去了，换了一台J3160来玩玩<br>为什么这次叫<strong>毕业之作</strong>，因为六月份我即将要中考，所以这是我最后一次折腾<br>这次给这台J3160的任务就是Linux，黑群晖，精简Win10LTSB<br>首先是主板，在海鲜市场逛了下，看见一个一百一十元，带无线网卡的板子，最后不要无线网卡九十五包邮拿下<br><img src="/img/j3160_1.jpg"><br>其次是机箱和电源，我这次直接买了1U的服务器机箱，一共一百零九元<br><img src="/img/j3160_2.jpg"><br>剩下的配件基本都是我从1037U拆下来的<br>首先讲讲<strong>黑群晖</strong>是怎么在PVE中安装的，群晖的引导我还是选择<a href="https://github.com/fbelavenuto/arpl/">arpl</a>，原因就是方便，快捷，自动<br>我们进入PVE，创建一个虚拟机<br><strong>操作系统</strong>那一块我们选择<strong>不使用任何介质</strong><br><img src="/img/j3160_3.jpg"><br>接下来就是<strong>磁盘</strong>先把磁盘删除，到最后我们再来新增硬盘<br><img src="/img/j3160_4.jpg"><br>最后全部默认即可<br>创建完成后，我们用SSH连接PVE，我们先制作黑群晖到引导</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">qm importdisk <span class="hljs-number">100</span> <span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/vz/</span>template<span class="hljs-regexp">/iso/</span>arpl.img local-lvm<br></code></pre></td></tr></table></figure><p>这条命令到含义就是把arpl写入虚拟磁盘，其中<strong>100</strong>是虚拟机的ID，后面的路径的<strong>arpl.img</strong>的路径<br>接着我们就可以在<strong>硬件</strong>看见一个<strong>未使用的磁盘0</strong><br><img src="/img/j3160_5.jpg"><br>我们选中，点击编辑，把<strong>总线&#x2F;设备</strong>改为<strong>SATA模式</strong>，最后点击添加<br>添加完我们把这个引导的空间改大一点<br><img src="/img/j3160_6.jpg"><br><img src="/img/j3160_7.jpg"><br><img src="/img/j3160_8.jpg"><br>这样子我们的引导就完成了，接下来就是直通硬盘<br>我们使用命令把硬盘全部列出</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">ls /dev/disk/<span class="hljs-keyword">by</span>-<span class="hljs-built_in">id</span><br></code></pre></td></tr></table></figure><p>其中带着<strong>ata-<strong>前缀的就是SATA盘，后面有接着硬盘的型号或大小，</strong>ata-WDC_WD1200BEVS-60UST0_WD-WXC907542001</strong>这个硬盘就是我们需要直通的硬盘<br>我们在SSH里面输入下面的命令</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">qm set <span class="hljs-number">100</span> -sata1 <span class="hljs-regexp">/dev/</span>disk<span class="hljs-regexp">/by-id/</span>ata-WDC_WD1200BEVS-<span class="hljs-number">60</span>UST0_WD-WXC907542001<br></code></pre></td></tr></table></figure><p>其中<strong>100</strong>为虚拟机的ID，<strong>sata1</strong>是直通硬盘的数量，我们可以算虚拟机有多少个硬盘然后减一，后面的路径不用管<strong>ata</strong>那一块就是我们刚刚获取的硬盘ID<br><img src="/img/j3160_10.jpg"><br>这样子就是成功了<br>接下来就是修改启动顺序<br><img src="/img/j3160_11.jpg"><br>记住，黑群晖的引导盘一定要排第一，然后启动虚拟机，我们可以在控制台看见黑群晖的IP端口，接下来的安装过程跟这篇文章一样<a href="https://bricawa.com/posts/8398/">升腾C33的折腾日记，安装黑群晖</a><br>这就是PVE安装黑群晖的全部过程，下面是精简Win10LTSB的镜像选择<br>镜像我是选择这个视频的<a href="https://b23.tv/nvELenX">https://b23.tv/nvELenX</a><br>到这里就是我这台J3160折腾的全部经历，不说了，好好学习，准备中考！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>折腾日记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>PVE</tag>
+      
+      <tag>Linux</tag>
+      
+      <tag>黑群晖</tag>
+      
+      <tag>J3160</tag>
+      
+      <tag>Win10LTSB</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>1037U虚拟程序方案选择</title>
+    <link href="/posts/61995/"/>
+    <url>/posts/61995/</url>
+    
+    <content type="html"><![CDATA[<p>今年的一月七号，在小黄鱼捡到了一台1037U的迷你主机，最后讲了一个多小时，八十八包邮友情价买下来了<br><img src="/img/1037u1.jpg"><br>为什么收一台1037U呢，因为我那台D525已经玩腻了(好吧，我就是想玩虚拟机)<br>这台1037U一共有八个USB，一个直插Sata，一个Msata，一个Mpcie这对我来说够用了<br>1037U到了后，我尝试了这三种虚拟方案<br>第一种: Esxi方案<br>Esxi这个方案最主要的就是稳定，然后没了，缺点就是占用内存大，4GB运行内存被它吃了1.9GB+，就剩2GB内存你让我玩什么，而且Esxi对硬件的兼容不好，有些特别的网卡需要找对应大佬编译的文件<br>第二种: PVE方案<br>PVE最好的就是开源，系统基于Debian，Debian可以说对很多机器的兼容度都很高，基本上不会出现不兼容问题，PVE安装完后占用系统运存大概990MB+，这对我4GB的运行内存就很友好了<br>第三种: Debian+Kvm+Cockpit方案<br>这种方案最强的就是省内存，整套安装下了内存占用比前面两个都小一半，大概300MB+，但是这种方案也有缺点，比如不能直通网络，跟Docker的网络一样，直通硬件也比较困难，要改这改那的<br>最后我选择了PVE方案</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>折腾日记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>1037U</tag>
+      
+      <tag>Esxi</tag>
+      
+      <tag>PVE</tag>
+      
+      <tag>Debian</tag>
+      
+      <tag>Kvm</tag>
+      
+      <tag>Cockpit</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>未成年在国内搭建网站有多麻烦</title>
+    <link href="/posts/15437/"/>
+    <url>/posts/15437/</url>
+    
+    <content type="html"><![CDATA[<p>本人是在上初三的初中生，今年十五岁，今天来吐槽吐槽没有成年的人，在国内搭建一个网站有多困难<br>首先是域名，域名的话只要有身份证就可以实名认证，然而我并没有，使用只能使用外国的域名商，外国的域名商好处就是不用实名，同样也有缺点，有些域名商不能使用<strong>支付宝</strong>支付<br>再来就是网站服务器，服务器这个容易，在阿里，腾讯什么的七十多就可以买一年服务器，很便宜，买完服务器后你会发现，如果要使用<strong>80，443</strong>这两个端口就要备案<br>下面这张图是腾讯云的备案流程，跟其他云的备案流程基本一致<br><img src="/img/html1.jpg"><br>大概要一个月左右，才可以看到你自己的网站<br>记住，这只对成年人有效，对的，未成年人不能备案，如果你坚持要备案只能用父母的身份去备案<br>到这里，如果没遇到什么情况的话你的网站就在国内搭建完成了<br>搭建完后，你要了解什么东西该发什么东西不该发，如果你一顿乱操作可能会去警局喝茶<br>所以在国内建站的唯一好处可能就是<strong>快</strong>了，相对的，国内建站限制比较多<br>那么我的博客是怎么建起来的，这里要感谢万能的Github Page还有CDN服务商<br>我的域名是在国外买的，然后托管到CloudFlare，为了就是方便管理<br><img src="/img/html2.jpg"><br>博客用的是<strong>Hexo</strong>，可以直接静态部署到Github Page，再加个CDN美滋滋<br>如果你是未成年想建站，可以参考我的建站法</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>闲谈</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Github</tag>
+      
+      <tag>建站</tag>
+      
+      <tag>未成年</tag>
+      
+      <tag>CloudFlare</tag>
+      
+      <tag>CDN</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>我的Switch被偷了</title>
+    <link href="/posts/38570/"/>
+    <url>/posts/38570/</url>
+    
+    <content type="html"><![CDATA[<p>在2022年11月20号，下午1:30左右，我的Switch Lite被两个小孩偷了<br>我和我的朋友在旁边玩舞立方，Switch Lite放在后面的充电箱上面，之后就被两个傻逼小孩偷了，一千元全部打水漂了<br>这是视频(*꒦ິ⌓꒦ີ)</p><div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe src="//player.bilibili.com/player.html?aid=649242299&bvid=BV1He4y1j7KY&cid=936740996&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;" ></iframe></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>闲谈</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Switch Lite</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>群晖Docker搭建蒲公英网络实现内网穿透</title>
+    <link href="/posts/28228/"/>
+    <url>/posts/28228/</url>
+    
+    <content type="html"><![CDATA[<p>最近搭建完黑群晖后一直在寻求怎么样可以外网访问黑群晖，有人说，群晖不是自带QC吗，其实群晖的QC速度非常慢，慢到离谱，而且我搭建的是黑群晖，白嫖了人家的系统，已经够知足了<br>下面是我自己找到的几种方法<br>1.公网IP<br>2.SakuraFrp<br>3.节点小宝<br>4.蒲公英<br>首先来说说公网IP，现在很多地方都不肯给公网IP了，有些地区的公网IP甚至要加钱，我家更不用说了，垃圾广电<br>再来就是SakuraFrp，SakuraFrp现在每月会自动把流量清空，国内节点要备案(这是肯定的)，国外节点基本不是被墙，就是被墙的路上<br>节点小宝这个不错，开箱就用，但是只有群晖平台，有些功能要使用Windows下载软件使用<br>最后就是蒲公英了，蒲公英用了一段时间，感觉不错，蒲公英就是虚拟组网，使用连接软件把群晖和手机连接在一个网段上<br>下面的搭建教程，这里分为Debian Docker搭建和群晖Docker搭建<br>Debian是因为在外面有时候需要远程控制项目，所以才在Debian搭建(Centos和Ububtu…..都可以根据下面的教程搭建)<br>在Debian搭建的话需要提前安装Docker(废话…)<br>首先拉取蒲公英的Docker镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull bestoray/pgyenterprise<br></code></pre></td></tr></table></figure><p>拉取完成我们创建一个容器</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-built_in">run</span> -d --name pgyvpn <span class="hljs-attribute">--device</span>=/dev/net/tun <span class="hljs-attribute">--net</span>=host <span class="hljs-attribute">--cap-add</span>=NET_ADMIN --env <span class="hljs-attribute">PGY_USERNAME</span>=<span class="hljs-string">&quot;xxx&quot;</span> --env <span class="hljs-attribute">PGY_PASSWORD</span>=<span class="hljs-string">&quot;xxx&quot;</span> bestoray/pgyenterprise<br></code></pre></td></tr></table></figure><p>其中<strong>PGY_USERNAME</strong>和<strong>PGY_PASSWORD</strong>分别是你注册蒲公英时的手机号和密码<br>新建容器完成后我们可以进入容器，然后登陆一下，看看有没有登陆成功</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs applescript">docker exec -<span class="hljs-keyword">it</span> pgyvpn bash<br>pgyvpn<br></code></pre></td></tr></table></figure><p><img src="/img/pgyvpn1.jpg"><br>这样子就是登陆成功了<br>我们可以通过输入<strong>9</strong>来切换语言<br>接下来是群晖的安装教程，我们进入群晖的界面，在套件中心搜索docker并安装<br><img src="/img/pgyvpn2.png"><br>安装完Docker后我们打开，在<strong>注册表</strong>搜索<code>bestoray/pgyvpn</code>，把这个映像下载下来<br>下载完成后，打开<strong>映像</strong>，然后选择刚才的映像点启动<br>我们先点<strong>配置功能</strong>，在里面把NET_ADMIN勾选上<br><img src="/img/pgyvpn6.png"><br>然后在<strong>高级设置</strong>内勾选<strong>启用自动重新启动</strong>，这样子重启群晖的时候就会自动启动容器<br><img src="/img/pgyvpn3.png"><br>接着我们在<strong>网络</strong>内勾选<strong>使用与Docker Host相同的网络</strong><br><img src="/img/pgyvpn4.png"><br>最后在<strong>环境</strong>里面创建一个PGY_USERNAME和PGY_PASSWORD的变量，分别填入手机号和密码<br><img src="/img/pgyvpn5.png"><br>然后无脑的应用，应用，容器就创建成功了<br>完成了安装后，我们可以去蒲公英官网下载连接软件<br>链接：<a href="https://pgy.oray.com/download/">https://pgy.oray.com/download/</a><br>下载，安装，打开，登陆账号，点击连接，就可以和你的设备处于同一个网络内了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>折腾日记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>黑群晖</tag>
+      
+      <tag>蒲公英</tag>
+      
+      <tag>虚拟组网</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>DSM7.0+使用毛玻璃登陆卡片</title>
+    <link href="/posts/44039/"/>
+    <url>/posts/44039/</url>
+    
+    <content type="html"><![CDATA[<p>在上一篇文章讲了搭建黑群晖的方法，然后我发现群晖登陆界面的小卡片有点挡壁纸，要是透明的该多好<br>Github项目链接: <a href="https://github.com/onlypeng/dsm7_login_translucent">https://github.com/onlypeng/dsm7_login_translucent</a><br>如果访问不了的话，下面有贴源码链接<br>蓝奏云: <a href="https://wwfc.lanzouf.com/iMKa90hrp60b">https://wwfc.lanzouf.com/iMKa90hrp60b</a><br>Google云盘: <a href="https://drive.google.com/file/d/14DowYLzxosK737RmpgpW7mHhiPpIff9z/view?usp=share_link">https://drive.google.com/file/d/14DowYLzxosK737RmpgpW7mHhiPpIff9z/view?usp=share_link</a><br>接着我们把源码上床…上传到一个目录里面<br><img src="/img/dsm1.png"><br>我们选择属性，把位置复制下来<br><img src="/img/dsm2.png"><br>复制完成后我们打开控制面板，选择<strong>终端机和SNMP</strong>，在里面我们把ssh打开<br><img src="/img/dsm4.png"><br><img src="/img/dsm5.png"><br>接着我们登陆ssh，ssh的用户名是你群晖的用户名，密码是群晖的密码<br>登陆上后我们切换<code>root</code>用户</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">sudo -<span class="hljs-selector-tag">i</span><br></code></pre></td></tr></table></figure><p><img src="/img/dsm6.jpg"><br>接着我们进入到刚才复制目录的位置</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> 复制的位置<br></code></pre></td></tr></table></figure><p><img src="/img/dsm7.jpg"><br>这里分为三个版本，请根据你的DSM版本选择<br>选择完成后我们运行脚本，然后选择<strong>1</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./install.sh<br></code></pre></td></tr></table></figure><p><img src="/img/dsm8.jpg"><br>这样子我们就修改完成了，现在可以去看看你的登陆界面了，是不是很漂亮<br><img src="/img/dsm.jpg"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>折腾日记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>DSM</tag>
+      
+      <tag>Github</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>升腾C33的折腾日记，安装黑群晖</title>
+    <link href="/posts/8398/"/>
+    <url>/posts/8398/</url>
+    
+    <content type="html"><![CDATA[<p>前几天，群友发来一辆小车车，海鲜市场升腾C33只要六十软妹币包邮，还送2G内存条和8G固态，这不得马上上车<br><img src="/img/centerm1.jpg"><br>到货后可以点亮，只要能点亮就不亏<br>这次准备把这台机子装个黑群晖，然后再安装一个500G的硬盘专门备份我的图片和文件<br>我本来以为我的焊接技术是可以把SATA电源线焊接进去的，没想到焊接了一晚上，愣是一条也没焊接上(有点尴尬)<br>接着群友说，某宝现在有做好的方4pin的电源线，如果我又花重金九块软妹币买了一条，接上去可以带动硬盘<br><img src="/img/centerm4.jpg"><br>接下来就是黑群晖安装过程，黑群晖安装需要一个引导盘，我们可以选择u盘或者硬盘，我这里就选择硬盘，别问为什么，问就是没有u盘了<br>这次用的引导是巴西老哥的引导，全自动编译引导<br>项目地址: <a href="https://github.com/fbelavenuto/arpl/">https://github.com/fbelavenuto/arpl/</a><br>我们进入到项目的releases，把镜像下载下来，然后写入u盘或者硬盘<br>releases地址: <a href="https://github.com/fbelavenuto/arpl/releases/">https://github.com/fbelavenuto/arpl/releases/</a><br>我们选择最新版本，最新版本下面有三个文件，其中第一个的<strong>物理机</strong>安装的镜像，剩下两个是<strong>虚拟机</strong>安装的镜像，最后一个<code>update.zip</code>我们不用管<br><img src="/img/centerm5.png"><br>我们这次是在物理机安装，所以选第一个<br>我们把文件下载下来，然后解压就可以获得镜像，最后把它写入你的u盘或者硬盘即可，这里就不操作了，百度有很多<br>我们写好引导后我们把u盘或者硬盘插入机器中，然后选择u盘或者硬盘启动<br>接着我们访问<code>http://机器ip:7681</code><br>机器的IP我们可以到路由器去看，或者用视频线连接机器也可以看到<br>引导界面的第一个选项是选择机型<br><img src="/img/centerm6.png"><br>这里我选择了DS3617xs<br><img src="/img/centerm7.png"><br>接下来就是选择引导黑群晖的版本<br><img src="/img/centerm8.png"><br>这里我选择了42218也就是DSM7.0<br><img src="/img/centerm9.png"><br><strong>s</strong>和<strong>i</strong>的选项分别是SN和MAC有需要洗白可以填，这里推荐半洗白<br><img src="/img/centerm10.png"><br>完事后我们选择<strong>Build the loader</strong>生成引导镜像<br><img src="/img/centerm11.png"><br><img src="/img/centerm12.png"><br>接下来等待即可，引导镜像生成完后会回到刚才的界面，我们再选择<strong>Boot the loader</strong>就加载引导镜像了，这个选项只要选择一次，下次开机会自动引导<br><img src="/img/centerm13.png"><br>我们引导完镜像后，再次进入<code>http://机器ip</code>接着就是群晖的界面了，点击安装<br><img src="/img/centerm14.png"><br>一定要选择<strong>从计算机手动上传.pat文件</strong><br>.pat文件可以从下面的<strong>Synology下载中心</strong>下载<img src="/img/centerm15.png"><br>之后就是漫长的等待<br><img src="/img/centerm16.png"><br>等待过后我们点<strong>开始</strong><br>之后就是创建账号什么的，应该都会吧<img src="/img/centerm17.png"><br>注意！！！<br>这个选项一定要选择最后一个，黑群晖不能自动更新<br><img src="/img/centerm18.png"><br>之后就是进到桌面了，有提示要创建一个储存池，我们跟着创建就可以了<br><img src="/img/centerm19.jpg"><br>到这里就完成安装了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>折腾日记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>DSM</tag>
+      
+      <tag>D2550</tag>
+      
+      <tag>黑群晖</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>博客优化日记</title>
+    <link href="/posts/9756/"/>
+    <url>/posts/9756/</url>
+    
+    <content type="html"><![CDATA[<p>在这篇文章<a href="https://bricawa.com/posts/39939/">使用Github免费白嫖一个博客</a>中，我讲述了如何使用Hexo搭建博客，并白嫖Github的托管功能<br>在搭建完后，我尝试访问博客时，感觉博客网站有点慢<br>经过研究后发现了两个问题<br>1.服务器地理位置<br>因为Github的服务器在国外，所以懂的都懂<br>2.博客图片过大<br>博客最重要的就是图片，导致加载慢的原因也有可能是图片，我们可以把图片托管在图床上，或者是压缩图片，使图片变小<br>3.html，js，css未压缩<br>Hexo博客生成静态文件后我们可以通过查看<strong>public</strong>文件夹里面的html，js，css文件<br>我们可以发现这些文件里面含有很多空格<br>下面是对比图<br><img src="/img/gulp1.jpg" alt="未压缩"><br><img src="/img/gulp2.jpg" alt="已压缩"><br>通过这两张图片我们就可以知道，Hexo生成静态文件有很多空格，在百度了一会儿后找到了解决方法<br>我们可以使用gulp来压缩这些静态文件<br>我们进入博客目录开始安装gulp</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">cnpm <span class="hljs-keyword">install </span>gulp --save<br>cnpm <span class="hljs-keyword">install </span>gulp-htmlclean gulp-htmlmin gulp-minify-css gulp-uglify gulp-imagemin gulp-minify-css gulp-<span class="hljs-keyword">babel </span>@<span class="hljs-keyword">babel/core </span>--save<br></code></pre></td></tr></table></figure><p>如果没有安装cnpm可以用下面的命令安装</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">npm install -g cnpm --registry=https:<span class="hljs-regexp">//</span>registry.npmmirror.com<br></code></pre></td></tr></table></figure><p>安装完gulp后，我们在博客目录新建一个文件<code>gulpfile.js</code><br><code>touch gulpfile.js</code><br>然后把下面的配置命令写入<code>gulpfile.js</code>文件里</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> gulp = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp&#x27;</span>);<br><span class="hljs-keyword">var</span> minifycss = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-minify-css&#x27;</span>);<br><span class="hljs-keyword">var</span> uglify = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-uglify&#x27;</span>);<br><span class="hljs-keyword">var</span> htmlmin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-htmlmin&#x27;</span>);<br><span class="hljs-keyword">var</span> htmlclean = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-htmlclean&#x27;</span>);<br><span class="hljs-comment">// 压缩html</span><br>gulp.<span class="hljs-title function_">task</span>(<span class="hljs-string">&#x27;minify-html&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> gulp.<span class="hljs-title function_">src</span>(<span class="hljs-string">&#x27;./public/**/*.html&#x27;</span>)<br>        .<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">htmlclean</span>())<br>        .<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">htmlmin</span>(&#123;<br>            <span class="hljs-attr">removeComments</span>: <span class="hljs-literal">true</span>,<br>            <span class="hljs-attr">minifyJS</span>: <span class="hljs-literal">true</span>,<br>            <span class="hljs-attr">minifyCSS</span>: <span class="hljs-literal">true</span>,<br>            <span class="hljs-attr">minifyURLs</span>: <span class="hljs-literal">true</span>,<br>        &#125;))<br>        .<span class="hljs-title function_">pipe</span>(gulp.<span class="hljs-title function_">dest</span>(<span class="hljs-string">&#x27;./public&#x27;</span>))<br>&#125;);<br><span class="hljs-comment">// 压缩css</span><br>gulp.<span class="hljs-title function_">task</span>(<span class="hljs-string">&#x27;minify-css&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> gulp.<span class="hljs-title function_">src</span>(<span class="hljs-string">&#x27;./public/**/*.css&#x27;</span>)<br>        .<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">minifycss</span>(&#123;<br>            <span class="hljs-attr">compatibility</span>: <span class="hljs-string">&#x27;ie8&#x27;</span><br>        &#125;))<br>        .<span class="hljs-title function_">pipe</span>(gulp.<span class="hljs-title function_">dest</span>(<span class="hljs-string">&#x27;./public/css&#x27;</span>));<br>&#125;);<br><span class="hljs-comment">// 压缩js</span><br>gulp.<span class="hljs-title function_">task</span>(<span class="hljs-string">&#x27;minify-js&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> gulp.<span class="hljs-title function_">src</span>(<span class="hljs-string">&#x27;./public/js/**/*.js&#x27;</span>)<br>        .<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">uglify</span>())<br>        .<span class="hljs-title function_">pipe</span>(gulp.<span class="hljs-title function_">dest</span>(<span class="hljs-string">&#x27;./public/js&#x27;</span>));<br>&#125;);<br><span class="hljs-comment">// 默认任务</span><br>gulp.<span class="hljs-title function_">task</span>(<span class="hljs-string">&#x27;default&#x27;</span>, gulp.<span class="hljs-title function_">parallel</span>(<br>    <span class="hljs-string">&#x27;minify-html&#x27;</span>,<span class="hljs-string">&#x27;minify-css&#x27;</span>,<span class="hljs-string">&#x27;minify-js&#x27;</span><br>));<br></code></pre></td></tr></table></figure><p><strong>注意！！！</strong><br><strong>第八行代码的意思是压缩哪个文件的html文件</strong><br><strong>第十六行代码的意思是压缩结束后文件将输出到哪里</strong><br><strong>以此类推</strong><br><strong>一般的Hexo程序就用我上面的来压缩即可，不需要改动</strong><br>写入后保存并退出，然后我们执行<code>gulp</code>进行压缩<br><img src="/img/gulp3.jpg"><br>这样子就是压缩成功了<br>如果你的Hexo是运行于Nginx上的还可以进行gzip压缩<br>打开Nginx的站点配置</p><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">vi <span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/sites-enabled/</span><span class="hljs-keyword">default</span><br></code></pre></td></tr></table></figure><p>我们把下面内容添加进<strong>server</strong>块里面</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-comment"># 开启gzip</span><br>gzip  <span class="hljs-keyword">on</span>;  <br><span class="hljs-comment"># 低于1kb的资源不压缩 </span><br>gzip_min_length <span class="hljs-number">1</span>k;<br><span class="hljs-comment"># 压缩级别1-9,越大压缩率越高,同时消耗cpu资源也越多，建议设置在5左右</span><br>gzip_comp_level <span class="hljs-number">5</span>; <br><span class="hljs-comment"># 需要压缩哪些响应类型的资源,多个空格隔开.不建议压缩图片</span><br>gzip_types <span class="hljs-built_in">text</span>/plain <span class="hljs-built_in">application</span>/javascript <span class="hljs-built_in">application</span>/x-javascript <span class="hljs-built_in">text</span>/javascript <span class="hljs-built_in">text</span>/xml <span class="hljs-built_in">text</span>/css;  <br><span class="hljs-comment"># 配置禁用gzip条件,支持正则.此处表示ie6及以下不启用gzip(因为ie低版本不支持)</span><br>gzip_disable <span class="hljs-string">&quot;MSIE [1-6]\.&quot;</span>;  <br><span class="hljs-comment"># 是否添加“Vary: Accept-Encoding”响应头</span><br>gzip_vary <span class="hljs-keyword">on</span>;<br></code></pre></td></tr></table></figure><p>添加完后我们保存并退出，再重启一下Nginx</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">service nginx restart</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>代码</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Github</tag>
+      
+      <tag>Hexo</tag>
+      
+      <tag>Gulp</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>使用Clash给Switch加速</title>
+    <link href="/posts/64373/"/>
+    <url>/posts/64373/</url>
+    
+    <content type="html"><![CDATA[<p>在<a href="https://bricawa.com/posts/8260/">这篇</a>文章讲述了Switch的购买建议，里面有说过怎么解决Switch下载游戏慢的问题，就是改DNS<br>有些人改了DNS后还是有点毛病，所以我们可以使用Clash给Switch加速<br>这篇文章需要亿点点<strong>Linux</strong>基础才可以看懂<br>在此之前需要准备一些环境<br>机场，<strong>Linux</strong>系统的机器，手，脑子<br>机场这里不做推荐，避免有人说恰饭<br>我们准备好后可以开始搭建<br>首先去Github上获取Clash<br>链接：<a href="https://github.com/Dreamacro/clash/releases">https://github.com/Dreamacro/clash/releases</a><br><img src="/img/clash1.jpg"><br>我的机器是<strong>AMD</strong>的，所以我们以<strong>clash-linux-amd64-v1.11.8.gz</strong>这个版本为例</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir -p <span class="hljs-regexp">/root/</span>.config/clash<br>cd <span class="hljs-regexp">/root/</span>.config/clash<br>wget https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Dreamacro/</span>clash<span class="hljs-regexp">/releases/</span>download<span class="hljs-regexp">/v1.11.8/</span>clash-linux-amd64-v1.<span class="hljs-number">11.8</span>.gz<br>gunzip clash-linux-amd64-v1.<span class="hljs-number">11.8</span>.gz<br>mv clash-linux-amd64-v1.<span class="hljs-number">11.8</span> clash<br>chmod +x clash<br></code></pre></td></tr></table></figure><p>第三行的链接请根据你的系统版本更换<br>第四，五行的文件名字请根据你下载到的文件名进行更换<br><strong>第一行创建文件夹的命令一定要跟我一样</strong><br>接着就是把你的<strong>订阅配置</strong>下载到这个目录(&#x2F;root&#x2F;.config&#x2F;clash)</p><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">wget -P /root/.config/clash -O config.yaml <span class="hljs-string">&quot;运营商提供的订阅链接&quot;</span><br></code></pre></td></tr></table></figure><p>接着我们启动Clash<br><img src="/img/clash2.jpg"><br>这样子就是成功了，提示的信息可能会有点出入，请自己甄别<br>我们按<strong>Ctrl+c</strong>停止程序<br>接着我们把Clash添加进开机自启动服务</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vi <span class="hljs-regexp">/etc/</span>systemd<span class="hljs-regexp">/system/</span>clash.service<br></code></pre></td></tr></table></figure><p>创建一个服务文件，接着把下面的代码添加进去即可</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=Clash service<br><span class="hljs-attr">After</span>=network.target<br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">Type</span>=simple<br><span class="hljs-attr">User</span>=root<br><span class="hljs-attr">ExecStart</span>=/root/.config/clash/clash<br><span class="hljs-section">[Install]</span><br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure><p>添加完后保存</p><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-params">system</span>ctl daemon-reload<br><span class="hljs-params">system</span>ctl enable clash.service<br><span class="hljs-params">system</span>ctl restart clash.service<br></code></pre></td></tr></table></figure><p>把三行命令打进去，这样子就可以开机自启动了<br>接下来是Switch配置，我们打开设置-互联网-互联网设置-选择和服务器同一个网络-更改设置<br>然后我们把<strong>代理服务器设置</strong>选择启用，服务器选择你服务器的IP，端口填7890(前提是没更改过，默认都是这个端口)，自动验证选择不起用<br>最后连接网络即可<br><img src="/img/clash3.jpg"><br><img src="/img/clash4.jpg"><br>听不懂的可以根据图片进行操作，感觉速度不错<br>到这里就完事了<br>如果手机需要连上代理的话也是这么填<br><img src="/img/clash5.jpg"><br>非必须：<br>如果需要控制Clash的节点的话我们可以安装一个面板<br>方法一Docker安装(需要安装Docker):</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-built_in">run</span> -p 8000:80 -d --name yacd <span class="hljs-attribute">--restart</span>=always haishanh/yacd:latest<br></code></pre></td></tr></table></figure><p>接着访问<strong>IP:8000</strong>即可<br>方法二Nginx运行(需要安装Nginx):</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/haishanh/y</span>acd.git 网站目录<br></code></pre></td></tr></table></figure><p>接着访问<strong>IP</strong>即可<br><img src="/img/clash6.jpg"><br><strong>API Base URL</strong>填写<strong>IP:9090</strong>即可(前提是你没改端口)<br><strong>注意</strong>: 有些运营商的配置文件external-controller选项是127.0.0.1:9090，这会导致面板无法连接到Clash<br><strong>解决方法</strong>: 我们将external-controller选项改为0.0.0.0:9090即可<br>然后我们就可以控制节点了<br>默认进去是英文，我们可以到Config-Language改为中文即可</p><p>如果你的运营商经常会更换链接，请添加这个脚本<br>需要环境<strong>Crontab</strong></p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vi <span class="hljs-regexp">/root/</span>.config<span class="hljs-regexp">/clash/u</span>pdate.sh<br></code></pre></td></tr></table></figure><p>我们新建一个文件<br>然后在里面填入下面的代码</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">## 下载配置文件</span><br>wget -P <span class="hljs-regexp">/root/</span>.config/clash -O config.yaml <span class="hljs-string">&quot;运营商提供的订阅链接&quot;</span><br><span class="hljs-comment">## 替换IP</span><br>sed -i <span class="hljs-string">&#x27;s/127.0.0.1:9090/0.0.0.0:9090/g&#x27;</span><br><span class="hljs-regexp">/root/</span>.config<span class="hljs-regexp">/clash/</span>config.yaml<br><span class="hljs-comment">## 重启Clash</span><br>systemctl restart clash.service<br></code></pre></td></tr></table></figure><p>输入完保存退出<br>然后再赋予这个脚本权限</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">chmod +x <span class="hljs-regexp">/root/</span>.config<span class="hljs-regexp">/clash/u</span>pdate.sh<br></code></pre></td></tr></table></figure><p>最后我们添加进Crontab</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">crontab -e</span><br></code></pre></td></tr></table></figure><p>新建一行，并输入</p><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">0 </span><span class="hljs-number">0</span> * * * sh /root/.config/clash/update.sh<br></code></pre></td></tr></table></figure><p>保存，重启Crontab即可</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/etc/i</span>nit.d/cron restart<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>杂类</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Github</tag>
+      
+      <tag>DNS</tag>
+      
+      <tag>Switch Lite</tag>
+      
+      <tag>Linux</tag>
+      
+      <tag>Clash</tag>
+      
+      <tag>Docker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Debian安装Cloudreve</title>
+    <link href="/posts/13451/"/>
+    <url>/posts/13451/</url>
+    
+    <content type="html"><![CDATA[<p>最近放弃了黑群晖，因为群晖很多功能我好多都不怎么用，而且群晖占的资源比较多，所以换到Linux<br>一开始安装的是Ubuntu看了<strong>某度</strong>的教学，安装了Ubuntu，安装完后我发现自己被坑了，因为我没事把剩下的磁盘空间分配给了 <strong>&#x2F;home</strong> 目录，装完后发现 <strong>&#x2F;home</strong> 目录没啥屌用<br>然后昨天就开始准备重装，有群友推荐装Debian，下载到镜像就开装了，这次我学聪明了<br>装好系统我准备装一个管理文件的软件，最后选定为<strong>Cloudreve</strong><br>别问为什么，问就是好用<br>开始部署(其实部署非常方便，会点Linux的都会)：<br>先到<strong>Github</strong>下载发行版<a href="https://github.com/cloudreve/Cloudreve/releases/tag/3.5.3">https://github.com/cloudreve/Cloudreve/releases/tag/3.5.3</a><br>选择适合自己系统的版本就可以，因为我这机器是amd所以选择amd版本的<br>我们新建一个文件夹，把它下载到里面</p><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mkdir cloudreve<br>wget 下载链接<br></code></pre></td></tr></table></figure><p>接着我们使用tar命令解压这个文件</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">tar</span> -xvf 文件名<br></code></pre></td></tr></table></figure><p>赋予可以运行的权限</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x cloudreve<br></code></pre></td></tr></table></figure><p>到这里就可以完事了<br>我们启动看看</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./cloudreve<br></code></pre></td></tr></table></figure><p>这样子就是启动成功了<br><img src="/img/cloudreve1.jpg"><br>要记住初始管理员账号和密码，如果忘记了我们可以删除<strong>cloudreve.db</strong>文件来重新生成管理员密码<br>我们访问<strong>ip:5212</strong>就可以进入Cloudreve了<br>下面是配置开机自启动，不想配置就可以出门右转了<br>我们用 <strong>Ctrl + c</strong> 把Cloudreve程序停止，接着跟着下面的操作进行</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vi <span class="hljs-regexp">/etc/</span>systemd<span class="hljs-regexp">/system/</span>cloudreve.service<br></code></pre></td></tr></table></figure><p>我这里用的是vim编辑器，如果你使用其他的编辑器请自行替换<br>进入后，我们把下面的代码全部添加到里面</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=Cloudreve<br><span class="hljs-attr">After</span>=network.target<br><br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">ExecStart</span>=/root/cloudreve/cloudreve<br><span class="hljs-attr">Type</span>=idle<br><br><span class="hljs-section">[Install]</span><br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure><p>注意：ExecStart是你cloudreve文件的绝对路径，如果跟我的不一样，请自行修改</p><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-params">system</span>ctl daemon-reload<br><span class="hljs-params">system</span>ctl start cloudreve.service<br><span class="hljs-params">system</span>ctl enable cloudreve.service<br></code></pre></td></tr></table></figure><p>这样子就成功了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>服务器</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Debian</tag>
+      
+      <tag>Github</tag>
+      
+      <tag>Ubuntu</tag>
+      
+      <tag>群晖</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>使用Github免费白嫖一个博客</title>
+    <link href="/posts/39939/"/>
+    <url>/posts/39939/</url>
+    
+    <content type="html"><![CDATA[<p>想搭建一个博客玩，但是服务器费用太贵，想到Github有托管功能，就自己琢磨着搭了一个<br>首先你要有一个自己的域名，我们先把域名解析到github.io解析都会吧<br>接着我们到进入<a href="https://github.com/">Github</a>，在里面我们注册一个账号，接着新建一个代码库<br><img src="/img/hexo1.jpg"><br>仓库名我们设置为这样子的格式<em>用户名.github.io</em><br>一定要设置公开，跟下面图片一样就可以了<br><img src="/img/hexo2.jpg"><br>接着我们安装<strong>Hexo</strong>程序<br>我这里已Termux安装，安装过程和方式跟Linux一样<br>记住要提前安装好Node，Npm这里就不说方法了，网上一搜一大堆，Node的版本一定要14.0+<br>我们开始安装<br>由于国外的网络不稳定，所以我们使用国内的网络安装<br>安装cnpm</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">npm install -g cnpm --registry=https:<span class="hljs-regexp">//</span>registry.npmmirror.com<br></code></pre></td></tr></table></figure><p>安装完后，我们安装<strong>Hexo</strong></p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">cnpm install hexo-<span class="hljs-keyword">cli</span> -g<br></code></pre></td></tr></table></figure><p>接着我们创建一个文件夹用于管理<strong>Hexo</strong>的博客文件</p><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mkdir hexo<br></code></pre></td></tr></table></figure><p>创建完后我们在里面初始化一下<strong>Hexo</strong>程序</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">hexo <span class="hljs-keyword">init</span><br></code></pre></td></tr></table></figure><p>这样子我们Hexo的程序就搭建的差不多了<br>我们部署一次在本地查看</p><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">hexo g <span class="hljs-meta">&amp;&amp; hexo s</span><br></code></pre></td></tr></table></figure><p>访问<a href="http://127.0.0.1:4000/">http://127.0.0.1:4000/</a>就可以看到博客了<br><img src="/img/hexo3.png"><br>为了博客美观，推荐安装主题<br>我们在本地搭建好博客后接着就要部署到Github上，我们先安装依赖</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install hexo-deployer-git <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure><p>接着我们打开Hexo的配置文件_config.yml<br>如果有安装主题，主题有配置文件则打开主题配置文件<br>记住：默认Hexo程序配置文件最底下会有类似的代码，请删除，也就是把</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">deploy:<br> <span class="hljs-built_in">type</span><span class="hljs-string">&#x27;&#x27;</span><br></code></pre></td></tr></table></figure><p>这段删除，然后把下面的代码添加进配置文件</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">deploy:</span><br><span class="hljs-symbol"> type:</span> git<br><span class="hljs-symbol"> repo:</span> 代码库链接<br><span class="hljs-symbol"> branch:</span> main<br></code></pre></td></tr></table></figure><p>代码库链接获取方式如下：<br><img src="/img/hexo4.jpg"><br>我们这里只要HTTPS的链接<br>填完后，我们输入下面的命令，把本地博客部署到Github上去</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo d</span><br></code></pre></td></tr></table></figure><p>然后会提示输入邮箱和密码<br>这里的密码并不是密码，而是token，创建token跟着下面的图走就可以<br><img src="/img/hexo5.jpg"><br><img src="/img/hexo6.jpg"><br><img src="/img/hexo7.jpg"><br><img src="/img/hexo8.jpg"><br>日期最好不要填永久，全选即可<br>获取完token后我们就可以部署Github了<br>部署完后我们进入代码库<br>我们选择设置-Page<br><img src="/img/hexo9.jpg"><br>我们在框内填入自己的域名<br>记得把域名解析CNMAE为github.io<br>然后把HTTPS选上<br>访问自己的域名，如果可以访问就代表正常<br>访问不了看看我说的步骤你有哪些没有做<br>新建一篇文章用下面的命令创建</p><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type"></span>文章名<br></code></pre></td></tr></table></figure><p>文章要使用Markdown语法编写<br>快速部署命令：</p><figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sas">hexo clean <span class="hljs-variable">&amp;&amp;</span> hexo g <span class="hljs-variable">&amp;&amp;</span> hexo d<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>代码</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Github</tag>
+      
+      <tag>Linux</tag>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Switch Lite购买感受和建议</title>
+    <link href="/posts/8260/"/>
+    <url>/posts/8260/</url>
+    
+    <content type="html"><![CDATA[<p>在今年七月二十一的时候，我入手了Switch Lite<br>当时暑假工打完，工资发了一千三，在<strong>海鲜市场</strong>蹲了几天，最后看见一个八百九十元箱说全宝可梦剑盾款的(这里的箱说全指的是箱子，说明书，配件全在)，最后以八百六十元的价格全款拿下<br>机子成色感觉挺不错的，背面吸风口那个有一点痕迹，正经人谁去看背面，戴个套♂就看不见了<br><img src="/img/nsl17.jpg"><br>这里说下，网上一直在说的<strong>三码和一</strong>在Switch Lite这里并不适用，因为Switch Lite的箱子是没有<strong>SN码</strong>的，只能<strong>二码合一</strong><br>那么二码指的是哪两个码呢？<br>第一个码是在主机底部那里<br><img src="/img/nsl2.jpg"><br>第二个是在设置-主机-序列号信息<br><img src="/img/nsl3.jpg"><br>只要这两个码对得上，机子一般都是全原的<br>这里肯定有人说，你都花了八百六十元了，为什么不加点钱直接上Switch呢？<br>我看重Switch Lite的原因主要是小，加上我不会用到拆卸手柄的功能，主机功能更不用说了，手柄我都不拆，还用啥主机功能，还有一个就是震动功能，其实要和不要也无所谓，谁玩游戏关注震动啊<br>接下来就是配件了(这里没有恰饭哦，我这小小的博客怎么可能恰饭呢)<br>首先是<strong>内存卡</strong>，这是最重要的，一定要选大点的，即使你玩卡带游戏也要选大点的<br>我自己用的是<strong>雷克沙的128GB内存卡</strong>(没恰饭！！)<br><img src="/img/nsl4.jpg"><br>现在我感觉128GB的卡也不够用了，因为一个<strong>Apex英雄</strong>就占了我内存卡的20多GB，还有一堆免费游戏，全装肯定不够用<br><img src="/img/nsl5.jpg"><br>接着就是钢化膜，钢化膜我用的是绿联的膜，买高清的就可以了，没必要上蓝光，钢化膜是一定要买的，Switch Lite的屏幕是塑料的和我们手机屏幕不一样，很容易留下刮痕<br><img src="/img/nsl6.jpg"><br>接着就是硅胶套，其实这个要不要都无所谓，有些硅胶套可以保护机子不被摔坏，有些可以提升手感<br><img src="/img/nsl17.jpg"><br>如果你的Switch Lite经常带出去玩的话一定要买一个包，某宝随便搜一搜，买适合自己的就可以了<br><img src="/img/nsl8.jpg"><br>这一套下来，我算了下<br>Switch Lite: 860软妹币<br>内存卡: 60.54软妹币<br>钢化膜: 14.8软妹币<br>硅胶套: 9.9软妹币<br>收纳包: 26软妹币<br>一共是971.24<br>这还没加上游戏，我现在的钱包已经快空了<br>另外我还买了条数据线，因为原版的线太笨重了，在家就用原版的，出去外面就用别的，这样子就减轻了一些负担<br>买数据线一定要选择大厂，不然Switch的尾插很容易烧坏<br>—————————分割线<br>接下来说一说购买流程吧<br>第一步：在平台找到喜欢的机器，一定要平台交易，不能私下交易<br>第二部：联系卖家获取机器情况，最好让卖家拍一下摇杆测试的视频还有机器外观的视频<br>第三步：机器到了一定要录开箱视频，避免机器到了有损坏什么的，找卖家理赔不了，接着就是检查各个按键和插口，还有屏幕有没有坏点<br>—————————分割线<br>另外：买Switch一定不要跟风买，不然玩没几天就出现在海鲜市场上了<br>Switch下游戏的时候推荐开个加速，这里推荐买个加速盒，这样子不会影响到自己的网络<br>如果没钱买加速器，这里推荐修改DNS，也可以起到一点作用<br>这个是韩国长安的<br>首选DNS：168.126.63.1<br>备用DNS：168.126.62.2<br><img src="/img/nsl9.jpg"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>杂类</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>DNS</tag>
+      
+      <tag>Switch Lite</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Linux安装MCSManager面板</title>
+    <link href="/posts/35306/"/>
+    <url>/posts/35306/</url>
+    
+    <content type="html"><![CDATA[<p>MCSManager面板是管理MC服务器的一个面板，简称MCSM<br>今天来说说它怎么安装<br>本篇教程适合用于Ubuntu&#x2F;Debian系统，Centos可以自己尝试<br>由于MCSManager迎来一次大更新<br>所以跟之前的安装方法有点区别，官方的Github也有安装教程，小白估计看不懂<br>下面开始安装<br>我们先安装依赖<br>MCSManager需要Node v14+<br>我们切到&#x2F;opt目录</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd <span class="hljs-regexp">/opt/</span><br></code></pre></td></tr></table></figure><p>然后现在Node的安装包</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget https:<span class="hljs-regexp">//</span>npmmirror.com<span class="hljs-regexp">/mirrors/</span>node<span class="hljs-regexp">/v14.17.6/</span>node-v14.<span class="hljs-number">17.6</span>-linux-x64.tar.gz<br></code></pre></td></tr></table></figure><p>解压文件</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">tar -zxvf <span class="hljs-keyword">node</span><span class="hljs-title">-v14</span>.<span class="hljs-number">17.6</span>-linux-x64.tar.gz<br></code></pre></td></tr></table></figure><p>解压完后删掉没用的文件</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">rm -fr <span class="hljs-keyword">node</span><span class="hljs-title">-v14</span>.<span class="hljs-number">17.6</span>-linux-x64.tar.gz<br></code></pre></td></tr></table></figure><p>然后我们把文件夹链接入系统环境变量</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">ln -s <span class="hljs-regexp">/opt/</span>node-v14.<span class="hljs-number">17.6</span>-linux-x64<span class="hljs-regexp">/bin/</span>node <span class="hljs-regexp">/usr/</span>bin/node<br>ln -s <span class="hljs-regexp">/opt/</span>node-v14.<span class="hljs-number">17.6</span>-linux-x64<span class="hljs-regexp">/bin/</span>npm <span class="hljs-regexp">/usr/</span>bin/npm<br></code></pre></td></tr></table></figure><p>接着我们想要安装MCSManager面板的地方<br>这里以&#x2F;root&#x2F;为准<br>在里面创建一个MCSManager文件夹，用于管理MCSManager面板文件<br>mkdir MCSManager<br>然后进入文件夹里面<br>cd MCSManager<br>我们拉去MCSManager的源码<br>这个是面板端的源码</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/MCSManager/</span>MCSManager-Web-Production.git<br></code></pre></td></tr></table></figure><p>我们重命名一下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> MCSManager-Web-Production web<br></code></pre></td></tr></table></figure><p>接着进入里面</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> web<br></code></pre></td></tr></table></figure><p>安装一下依赖，防止出错</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">npm install <span class="hljs-params">--production</span> <span class="hljs-params">--registry=https</span>:<span class="hljs-string">//registry.npmmirror.com/</span><br></code></pre></td></tr></table></figure><p>安装完面板端后，我们接着安装节点端<br>先回到MCSManager文件夹</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd <span class="hljs-regexp">/root/</span>MCSManager<br>git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/MCSManager/</span>MCSManager-Daemon-Production.git<br>mv MCSManager-Daemon-Production daemon<br>cd daemon<br>npm install --production --registry=https:<span class="hljs-regexp">//</span>registry.npmmirror.com/<br></code></pre></td></tr></table></figure><p>还是跟上面一样的骚操作，只不过换了几个东西<br>依赖安装好后我们启动试试<br>先启动面板端</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /root/MCSManager/web<br>node app.js<br></code></pre></td></tr></table></figure><p>再启动节点端</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /root/MCSManager/daemon<br>node app.js<br></code></pre></td></tr></table></figure><p>因为这里需要同时启动两个东西，所以需要用到<strong>Screen</strong>，懂的都懂<br>启动好后我们访问<br><code>http://服务器ip:23333</code><br>进可以进入我们的MCSManager面板了<br>开始使用都会点吧<br><img src="/img/mcsm1.jpg"><br>然后提示让你创建一个账号，应该都会吧，没有人不会吧<br><img src="/img/mcsm2.jpg"><br>如果你是刚刚上手MCSManager面板，就选择首次使用<br>以前用过就选择老用户<br>这里推荐选择首次使用，因为现在的MCSManager面板跟之前不一样了<br><img src="/img/mcsm3.jpg"><br>到这里就全部安装好了，启动服务器什么的都会吧</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>服务器</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Github</tag>
+      
+      <tag>MCSManager</tag>
+      
+      <tag>Node</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>用Debian/Ubuntu设备挖XMR</title>
+    <link href="/posts/30350/"/>
+    <url>/posts/30350/</url>
+    
+    <content type="html"><![CDATA[<p>本篇文章只介绍怎么挖矿，不介绍怎么买卖货币<br>我们需要准备一个XMR的钱包地址，还需要准备一个矿池，这里就不多说了<br>我们先进入ssh[本篇文章的命令Ubuntu和Debian通用]<br>日常更新</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">apt-<span class="hljs-built_in">get</span> update<br>apt-<span class="hljs-built_in">get</span> upgrade<br></code></pre></td></tr></table></figure><p>接着安装需要的依赖<br>apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev<br>有提示<strong>是否安装</strong>回车就可以<br>接着把官方挖矿的脚本Clone下来<br>git clone <a href="https://github.com/xmrig/xmrig.git">https://github.com/xmrig/xmrig.git</a><br>如果出现404可以试试用代理，自建代理服务器在上一篇文章有<a href="/posts/32336/">用CloudFlare加速Github下载</a><br>获取到源码后我们开始编译，小白不用怕，一步一步跟我操作就可以</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> xmrig/build<br><span class="hljs-built_in">cd</span> xmrig/build<br>cmake ..<br>make -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure><p>接着我们等待编译完成就行了<br>接着我们用命令启动挖矿脚本</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">./xmrig</span> <span class="hljs-params">--randomx-mode=light</span> <span class="hljs-params">--no-huge-pages</span> -u 钱包地址 -p Linux -o 矿池地址<br></code></pre></td></tr></table></figure><p>到这里我们的脚本安装教程就结束了<br>最后给大家献上一句话<br><strong>别想用挖矿养家糊口，踏实的干才能走上人生巅峰迎娶白富美</strong><br>对于想赚零花钱的学生可以在去学校之前把脚本开开，回家后就有收益，爽歪歪</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>代码</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Github</tag>
+      
+      <tag>Linux</tag>
+      
+      <tag>XMR</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>用CloudFlare加速Github下载</title>
+    <link href="/posts/32336/"/>
+    <url>/posts/32336/</url>
+    
+    <content type="html"><![CDATA[<p>最近在拉取Github项目源码的时候经常出现404，自己在网上研究了一下，发现有个项目可以用CloudFlare的代理流量来下载Github的项目源码<br>我们今天用的项目是<a href="https://github.com/hunshcn/gh-proxy">gh-proxy</a><br>首先我们注册个CloudFlare账号<a href="http://cloudflare.com/">点我转跳CF</a><br>注册应该都会吧，没有人不会注册吧<br>接着我们点开菜单的Workers<br><img src="/img/cf1.jpg"><br>选择免费的那个接着创建一个服务，服务名称就是以后访问的方式，不过没用，因为CF的域名被污染了，所以自己要准备一个域名并添加到CloudFlera里面<br>我们选择<strong>HTTP处理程序</strong><br>创建好了后我们点<strong>快速编辑</strong>，删除全部代码把下面的代码填进去</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-meta">&#x27;use strict&#x27;</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * static files (404.html, sw.js, conf.js)</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">ASSET_URL</span> = <span class="hljs-string">&#x27;https://hunshcn.github.io/gh-proxy/&#x27;</span><br><span class="hljs-comment">// 前缀，如果自定义路由为example.com/gh/*，将PREFIX改为 &#x27;/gh/&#x27;，注意，少一个杠都会错！</span><br><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PREFIX</span> = <span class="hljs-string">&#x27;/&#x27;</span><br><span class="hljs-comment">// 分支文件使用jsDelivr镜像的开关，0为关闭，默认关闭</span><br><span class="hljs-keyword">const</span> <span class="hljs-title class_">Config</span> = &#123;<br>    <span class="hljs-attr">jsdelivr</span>: <span class="hljs-number">0</span><br>&#125;<br><br><span class="hljs-keyword">const</span> whiteList = [] <span class="hljs-comment">// 白名单，路径里面有包含字符的才会通过，e.g. [&#x27;/username/&#x27;]</span><br><br><span class="hljs-comment">/** <span class="hljs-doctag">@type</span> &#123;<span class="hljs-type">RequestInit</span>&#125; */</span><br><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PREFLIGHT_INIT</span> = &#123;<br>    <span class="hljs-attr">status</span>: <span class="hljs-number">204</span>,<br>    <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>(&#123;<br>        <span class="hljs-string">&#x27;access-control-allow-origin&#x27;</span>: <span class="hljs-string">&#x27;*&#x27;</span>,<br>        <span class="hljs-string">&#x27;access-control-allow-methods&#x27;</span>: <span class="hljs-string">&#x27;GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS&#x27;</span>,<br>        <span class="hljs-string">&#x27;access-control-max-age&#x27;</span>: <span class="hljs-string">&#x27;1728000&#x27;</span>,<br>    &#125;),<br>&#125;<br><br><br><span class="hljs-keyword">const</span> exp1 = <span class="hljs-regexp">/^(?:https?:\/\/)?github\.com\/.+?\/.+?\/(?:releases|archive)\/.*$/i</span><br><span class="hljs-keyword">const</span> exp2 = <span class="hljs-regexp">/^(?:https?:\/\/)?github\.com\/.+?\/.+?\/(?:blob|raw)\/.*$/i</span><br><span class="hljs-keyword">const</span> exp3 = <span class="hljs-regexp">/^(?:https?:\/\/)?github\.com\/.+?\/.+?\/(?:info|git-).*$/i</span><br><span class="hljs-keyword">const</span> exp4 = <span class="hljs-regexp">/^(?:https?:\/\/)?raw\.(?:githubusercontent|github)\.com\/.+?\/.+?\/.+?\/.+$/i</span><br><span class="hljs-keyword">const</span> exp5 = <span class="hljs-regexp">/^(?:https?:\/\/)?gist\.(?:githubusercontent|github)\.com\/.+?\/.+?\/.+$/i</span><br><span class="hljs-keyword">const</span> exp6 = <span class="hljs-regexp">/^(?:https?:\/\/)?github\.com\/.+?\/.+?\/tags.*$/i</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">any</span>&#125; <span class="hljs-variable">body</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">status</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">Object&lt;string, string&gt;</span>&#125; <span class="hljs-variable">headers</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">makeRes</span>(<span class="hljs-params">body, status = <span class="hljs-number">200</span>, headers = &#123;&#125;</span>) &#123;<br>    headers[<span class="hljs-string">&#x27;access-control-allow-origin&#x27;</span>] = <span class="hljs-string">&#x27;*&#x27;</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Response</span>(body, &#123;status, headers&#125;)<br>&#125;<br><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string</span>&#125; <span class="hljs-variable">urlStr</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">newUrl</span>(<span class="hljs-params">urlStr</span>) &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(urlStr)<br>    &#125; <span class="hljs-keyword">catch</span> (err) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span><br>    &#125;<br>&#125;<br><br><br><span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;fetch&#x27;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> ret = <span class="hljs-title function_">fetchHandler</span>(e)<br>        .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-title function_">makeRes</span>(<span class="hljs-string">&#x27;cfworker error:\n&#x27;</span> + err.<span class="hljs-property">stack</span>, <span class="hljs-number">502</span>))<br>    e.<span class="hljs-title function_">respondWith</span>(ret)<br>&#125;)<br><br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">checkUrl</span>(<span class="hljs-params">u</span>) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i <span class="hljs-keyword">of</span> [exp1, exp2, exp3, exp4, exp5, exp6]) &#123;<br>        <span class="hljs-keyword">if</span> (u.<span class="hljs-title function_">search</span>(i) === <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">FetchEvent</span>&#125; <span class="hljs-variable">e</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchHandler</span>(<span class="hljs-params">e</span>) &#123;<br>    <span class="hljs-keyword">const</span> req = e.<span class="hljs-property">request</span><br>    <span class="hljs-keyword">const</span> urlStr = req.<span class="hljs-property">url</span><br>    <span class="hljs-keyword">const</span> urlObj = <span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(urlStr)<br>    <span class="hljs-keyword">let</span> path = urlObj.<span class="hljs-property">searchParams</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;q&#x27;</span>)<br>    <span class="hljs-keyword">if</span> (path) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Response</span>.<span class="hljs-title function_">redirect</span>(<span class="hljs-string">&#x27;https://&#x27;</span> + urlObj.<span class="hljs-property">host</span> + <span class="hljs-variable constant_">PREFIX</span> + path, <span class="hljs-number">301</span>)<br>    &#125;<br>    <span class="hljs-comment">// cfworker 会把路径中的 `//` 合并成 `/`</span><br>    path = urlObj.<span class="hljs-property">href</span>.<span class="hljs-title function_">substr</span>(urlObj.<span class="hljs-property">origin</span>.<span class="hljs-property">length</span> + <span class="hljs-variable constant_">PREFIX</span>.<span class="hljs-property">length</span>).<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/^https?:\/+/</span>, <span class="hljs-string">&#x27;https://&#x27;</span>)<br>    <span class="hljs-keyword">if</span> (path.<span class="hljs-title function_">search</span>(exp1) === <span class="hljs-number">0</span> || path.<span class="hljs-title function_">search</span>(exp5) === <span class="hljs-number">0</span> || path.<span class="hljs-title function_">search</span>(exp6) === <span class="hljs-number">0</span> || path.<span class="hljs-title function_">search</span>(exp3) === <span class="hljs-number">0</span> || path.<span class="hljs-title function_">search</span>(exp4) === <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title function_">httpHandler</span>(req, path)<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (path.<span class="hljs-title function_">search</span>(exp2) === <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Config</span>.<span class="hljs-property">jsdelivr</span>) &#123;<br>            <span class="hljs-keyword">const</span> newUrl = path.<span class="hljs-title function_">replace</span>(<span class="hljs-string">&#x27;/blob/&#x27;</span>, <span class="hljs-string">&#x27;@&#x27;</span>).<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/^(?:https?:\/\/)?github\.com/</span>, <span class="hljs-string">&#x27;https://cdn.jsdelivr.net/gh&#x27;</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-title class_">Response</span>.<span class="hljs-title function_">redirect</span>(newUrl, <span class="hljs-number">302</span>)<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            path = path.<span class="hljs-title function_">replace</span>(<span class="hljs-string">&#x27;/blob/&#x27;</span>, <span class="hljs-string">&#x27;/raw/&#x27;</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-title function_">httpHandler</span>(req, path)<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (path.<span class="hljs-title function_">search</span>(exp4) === <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">const</span> newUrl = path.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/(?&lt;=com\/.+?\/.+?)\/(.+?\/)/</span>, <span class="hljs-string">&#x27;@$1&#x27;</span>).<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/^(?:https?:\/\/)?raw\.(?:githubusercontent|github)\.com/</span>, <span class="hljs-string">&#x27;https://cdn.jsdelivr.net/gh&#x27;</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Response</span>.<span class="hljs-title function_">redirect</span>(newUrl, <span class="hljs-number">302</span>)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-variable constant_">ASSET_URL</span> + path)<br>    &#125;<br>&#125;<br><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">Request</span>&#125; <span class="hljs-variable">req</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string</span>&#125; <span class="hljs-variable">pathname</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">httpHandler</span>(<span class="hljs-params">req, pathname</span>) &#123;<br>    <span class="hljs-keyword">const</span> reqHdrRaw = req.<span class="hljs-property">headers</span><br><br>    <span class="hljs-comment">// preflight</span><br>    <span class="hljs-keyword">if</span> (req.<span class="hljs-property">method</span> === <span class="hljs-string">&#x27;OPTIONS&#x27;</span> &amp;&amp;<br>        reqHdrRaw.<span class="hljs-title function_">has</span>(<span class="hljs-string">&#x27;access-control-request-headers&#x27;</span>)<br>    ) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Response</span>(<span class="hljs-literal">null</span>, <span class="hljs-variable constant_">PREFLIGHT_INIT</span>)<br>    &#125;<br><br>    <span class="hljs-keyword">const</span> reqHdrNew = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>(reqHdrRaw)<br><br>    <span class="hljs-keyword">let</span> urlStr = pathname<br>    <span class="hljs-keyword">let</span> flag = <span class="hljs-literal">false</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i <span class="hljs-keyword">of</span> whiteList) &#123;<br>        <span class="hljs-keyword">if</span> (urlStr.<span class="hljs-title function_">includes</span>(i)) &#123;<br>            flag = <span class="hljs-literal">true</span><br>            <span class="hljs-keyword">break</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (!flag) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Response</span>(<span class="hljs-string">&quot;blocked&quot;</span>, &#123;<span class="hljs-attr">status</span>: <span class="hljs-number">403</span>&#125;)<br>    &#125;<br>    <span class="hljs-keyword">if</span> (urlStr.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">&#x27;github&#x27;</span>)) &#123;<br>        urlStr = <span class="hljs-string">&#x27;https://&#x27;</span> + urlStr<br>    &#125;<br>    <span class="hljs-keyword">const</span> urlObj = <span class="hljs-title function_">newUrl</span>(urlStr)<br><br>    <span class="hljs-comment">/** <span class="hljs-doctag">@type</span> &#123;<span class="hljs-type">RequestInit</span>&#125; */</span><br>    <span class="hljs-keyword">const</span> reqInit = &#123;<br>        <span class="hljs-attr">method</span>: req.<span class="hljs-property">method</span>,<br>        <span class="hljs-attr">headers</span>: reqHdrNew,<br>        <span class="hljs-attr">redirect</span>: <span class="hljs-string">&#x27;manual&#x27;</span>,<br>        <span class="hljs-attr">body</span>: req.<span class="hljs-property">body</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">proxy</span>(urlObj, reqInit)<br>&#125;<br><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">URL</span>&#125; <span class="hljs-variable">urlObj</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">RequestInit</span>&#125; <span class="hljs-variable">reqInit</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">proxy</span>(<span class="hljs-params">urlObj, reqInit</span>) &#123;<br>    <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(urlObj.<span class="hljs-property">href</span>, reqInit)<br>    <span class="hljs-keyword">const</span> resHdrOld = res.<span class="hljs-property">headers</span><br>    <span class="hljs-keyword">const</span> resHdrNew = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>(resHdrOld)<br><br>    <span class="hljs-keyword">const</span> status = res.<span class="hljs-property">status</span><br><br>    <span class="hljs-keyword">if</span> (resHdrNew.<span class="hljs-title function_">has</span>(<span class="hljs-string">&#x27;location&#x27;</span>)) &#123;<br>        <span class="hljs-keyword">let</span> _location = resHdrNew.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;location&#x27;</span>)<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title function_">checkUrl</span>(_location))<br>            resHdrNew.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;location&#x27;</span>, <span class="hljs-variable constant_">PREFIX</span> + _location)<br>        <span class="hljs-keyword">else</span> &#123;<br>            reqInit.<span class="hljs-property">redirect</span> = <span class="hljs-string">&#x27;follow&#x27;</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-title function_">proxy</span>(<span class="hljs-title function_">newUrl</span>(_location), reqInit)<br>        &#125;<br>    &#125;<br>    resHdrNew.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;access-control-expose-headers&#x27;</span>, <span class="hljs-string">&#x27;*&#x27;</span>)<br>    resHdrNew.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;access-control-allow-origin&#x27;</span>, <span class="hljs-string">&#x27;*&#x27;</span>)<br><br>    resHdrNew.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;content-security-policy&#x27;</span>)<br>    resHdrNew.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;content-security-policy-report-only&#x27;</span>)<br>    resHdrNew.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;clear-site-data&#x27;</span>)<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Response</span>(res.<span class="hljs-property">body</span>, &#123;<br>        status,<br>        <span class="hljs-attr">headers</span>: resHdrNew,<br>    &#125;)<br>&#125;<br></code></pre></td></tr></table></figure><p>填完后点击<strong>保存并部署</strong><br>然后点击旁边的<strong>发送</strong>按钮，如果显示200K就是正常的了，不是的话就看看你的代码会不会输错<br><img src="/img/cf2.jpg"><br>因为CF域名被DNS污染的关系，我们需要使用自己的域名，我们再次点开Workers选择刚才创建的服务，点击<strong>触发器</strong><br>找到触发器选择<strong>添加自定义域</strong>，把你想要的自定义域名填进去<br><img src="/img/cf3.jpg"><br>然后访问你的域名就可以使用了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>代码</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Github</tag>
+      
+      <tag>CloudFlare</tag>
+      
+      <tag>CDN</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>用Ubuntu搭建我的世界服务器</title>
+    <link href="/posts/35408/"/>
+    <url>/posts/35408/</url>
+    
+    <content type="html"><![CDATA[<p>今天的教程用到的系统是:Ubuntu<br>在Termux安装的Ubuntu也可以使用<br>本次教程搭建的是Nukkit服务器<br>这篇文章主要是来测试博客的功能，所以看的有点花里胡哨<br>首先在确保你有在Ubuntu上安装了Java</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">java -<span class="hljs-built_in">version</span><br></code></pre></td></tr></table></figure><p>使用这条命令查询你的Java版本号<br><em>root@localhost:~# java -version</em><br><em>java version “15.0.2” 2021-01-19Java(TM) SE Runtime Environment (build 15.0.2+7-27)Java HotSpot(TM) 64-Bit Server VM (build 15.0.2+7-27, mixed mode)</em><br>通过这条命令可以知道你有没有安装Java<br>安装Java的方法这里就不叙述了，CSDN有很多教程<br>有了Java后开始安装</p><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mkdir <span class="hljs-built_in">Server</span>/nk<br></code></pre></td></tr></table></figure><p>这条命令是创建一个nk文件在Server里面<br>接着转到nk目录</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> Server/nk<br></code></pre></td></tr></table></figure><p>下载nk服务端</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget https:<span class="hljs-regexp">//</span>ci.opencollab.dev<span class="hljs-regexp">/job/</span>NukkitX<span class="hljs-regexp">/job/</span>Nukkit<span class="hljs-regexp">/job/m</span>aster<span class="hljs-regexp">/825/</span>artifact<span class="hljs-regexp">/target/</span>nukkit-<span class="hljs-number">1.0</span>-SNAPSHOT.jar<br></code></pre></td></tr></table></figure><p>这是版本是1.16.201<br>如果有新版的可以到这个链接去看看<br><em><strong><a href="https://ci.opencollab.dev/job/NukkitX/job/Nukkit/job/master/">https://ci.opencollab.dev/job/NukkitX/job/Nukkit/job/master/</a></strong></em><br><em><strong>1.16.201是#825的</strong></em><br>接着执行</p><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">vim <span class="hljs-keyword">run</span>.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure><p>在键盘输入<strong>i</strong>然后在里面输入</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">java</span> -jar nukkit-<span class="hljs-number">1</span>.<span class="hljs-number">0</span>-SNAPSHOT.jar<br></code></pre></td></tr></table></figure><p>然后按Esc<br>输入**wq!**不要复制粘贴用键盘输入<br>接着执行</p><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">chmod 777 <span class="hljs-keyword">run</span>.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure><p>给这个文件权限<br>然后执行</p><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">./<span class="hljs-keyword">run</span>.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure><p>服务器就启动了<br>以后直接用run.sh启动，就不用记那么长的命令了<br><img src="/img/mc1.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>服务器</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>Server</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
