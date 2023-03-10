@@ -11,15 +11,6 @@
   </url>
   
   <url>
-    <loc>https://bricawa.com/posts/61995/</loc>
-    
-    <lastmod>2023-03-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://bricawa.com/posts/44039/</loc>
     
     <lastmod>2023-03-05</lastmod>
@@ -47,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://bricawa.com/posts/8260/</loc>
+    <loc>https://bricawa.com/posts/61995/</loc>
     
     <lastmod>2023-03-05</lastmod>
     
@@ -57,6 +48,15 @@
   
   <url>
     <loc>https://bricawa.com/posts/64373/</loc>
+    
+    <lastmod>2023-03-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bricawa.com/posts/8260/</loc>
     
     <lastmod>2023-03-05</lastmod>
     
@@ -119,15 +119,6 @@
   </url>
   
   <url>
-    <loc>https://bricawa.com/posts/32336/</loc>
-    
-    <lastmod>2023-03-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://bricawa.com/posts/30350/</loc>
     
     <lastmod>2023-03-05</lastmod>
@@ -138,6 +129,15 @@
   
   <url>
     <loc>https://bricawa.com/posts/35408/</loc>
+    
+    <lastmod>2023-03-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bricawa.com/posts/32336/</loc>
     
     <lastmod>2023-03-05</lastmod>
     
@@ -182,48 +182,6 @@
 
   
   <url>
-    <loc>https://bricawa.com/tags/1037U/</loc>
-    <lastmod>2023-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bricawa.com/tags/Esxi/</loc>
-    <lastmod>2023-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bricawa.com/tags/PVE/</loc>
-    <lastmod>2023-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bricawa.com/tags/Debian/</loc>
-    <lastmod>2023-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bricawa.com/tags/Kvm/</loc>
-    <lastmod>2023-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bricawa.com/tags/Cockpit/</loc>
-    <lastmod>2023-03-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://bricawa.com/tags/DSM/</loc>
     <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -232,6 +190,13 @@
   
   <url>
     <loc>https://bricawa.com/tags/Github/</loc>
+    <lastmod>2023-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bricawa.com/tags/Debian/</loc>
     <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -260,6 +225,41 @@
   
   <url>
     <loc>https://bricawa.com/tags/Node/</loc>
+    <lastmod>2023-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bricawa.com/tags/1037U/</loc>
+    <lastmod>2023-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bricawa.com/tags/Esxi/</loc>
+    <lastmod>2023-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bricawa.com/tags/PVE/</loc>
+    <lastmod>2023-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bricawa.com/tags/Kvm/</loc>
+    <lastmod>2023-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bricawa.com/tags/Cockpit/</loc>
     <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
