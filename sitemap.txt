@@ -1,3 +1,4 @@
+https://bricawa.com/posts/56512/
 https://bricawa.com/posts/61995/
 https://bricawa.com/posts/44039/
 https://bricawa.com/posts/13451/
@@ -29,9 +30,10 @@ https://bricawa.com/tags/Ubuntu/
 https://bricawa.com/tags/%E7%BE%A4%E6%99%96/
 https://bricawa.com/tags/MCSManager/
 https://bricawa.com/tags/Node/
+https://bricawa.com/tags/Windows/
+https://bricawa.com/tags/Linux/
 https://bricawa.com/tags/DNS/
 https://bricawa.com/tags/Switch-Lite/
-https://bricawa.com/tags/Linux/
 https://bricawa.com/tags/Clash/
 https://bricawa.com/tags/Docker/
 https://bricawa.com/tags/Hexo/

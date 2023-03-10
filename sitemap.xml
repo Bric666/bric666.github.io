@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bricawa.com/posts/56512/</loc>
+    
+    <lastmod>2023-03-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://bricawa.com/posts/61995/</loc>
     
     <lastmod>2023-03-05</lastmod>
@@ -166,7 +175,7 @@
 
   <url>
     <loc>https://bricawa.com/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -174,217 +183,224 @@
   
   <url>
     <loc>https://bricawa.com/tags/1037U/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Esxi/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/PVE/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Debian/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Kvm/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Cockpit/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/DSM/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Github/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Ubuntu/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/%E7%BE%A4%E6%99%96/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/MCSManager/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Node/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://bricawa.com/tags/DNS/</loc>
-    <lastmod>2023-03-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bricawa.com/tags/Switch-Lite/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <loc>https://bricawa.com/tags/Windows/</loc>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Linux/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bricawa.com/tags/DNS/</loc>
+    <lastmod>2023-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bricawa.com/tags/Switch-Lite/</loc>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Clash/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Docker/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Hexo/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/D2550/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/%E9%BB%91%E7%BE%A4%E6%99%96/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Gulp/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/%E5%BB%BA%E7%AB%99/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/%E6%9C%AA%E6%88%90%E5%B9%B4/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/CloudFlare/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/CDN/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/J3160/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Win10LTSB/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/XMR/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/Server/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/%E8%92%B2%E5%85%AC%E8%8B%B1/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/tags/%E8%99%9A%E6%8B%9F%E7%BB%84%E7%BD%91/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -393,35 +409,35 @@
   
   <url>
     <loc>https://bricawa.com/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/categories/%E6%9D%82%E7%B1%BB/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/categories/%E4%BB%A3%E7%A0%81/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bricawa.com/categories/%E9%97%B2%E8%B0%88/</loc>
-    <lastmod>2023-03-05</lastmod>
+    <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
