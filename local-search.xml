@@ -82,13 +82,13 @@
     
     <tags>
       
-      <tag>Debian</tag>
-      
       <tag>1037U</tag>
       
       <tag>Esxi</tag>
       
       <tag>PVE</tag>
+      
+      <tag>Debian</tag>
       
       <tag>Kvm</tag>
       
@@ -324,9 +324,9 @@
     
     <tags>
       
-      <tag>Github</tag>
-      
       <tag>Debian</tag>
+      
+      <tag>Github</tag>
       
       <tag>Ubuntu</tag>
       

@@ -97,13 +97,13 @@
     <category term="折腾日记" scheme="https://bricawa.com/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/"/>
     
     
-    <category term="Debian" scheme="https://bricawa.com/tags/Debian/"/>
-    
     <category term="1037U" scheme="https://bricawa.com/tags/1037U/"/>
     
     <category term="Esxi" scheme="https://bricawa.com/tags/Esxi/"/>
     
     <category term="PVE" scheme="https://bricawa.com/tags/PVE/"/>
+    
+    <category term="Debian" scheme="https://bricawa.com/tags/Debian/"/>
     
     <category term="Kvm" scheme="https://bricawa.com/tags/Kvm/"/>
     
@@ -332,9 +332,9 @@
     <category term="服务器" scheme="https://bricawa.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
     
-    <category term="Github" scheme="https://bricawa.com/tags/Github/"/>
-    
     <category term="Debian" scheme="https://bricawa.com/tags/Debian/"/>
+    
+    <category term="Github" scheme="https://bricawa.com/tags/Github/"/>
     
     <category term="Ubuntu" scheme="https://bricawa.com/tags/Ubuntu/"/>
     
